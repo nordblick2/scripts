@@ -25,9 +25,9 @@ class GeomarWeatherData  implements JsonSerializable {
 		6 => 14.40,		// starker Wind
 		7 => 17.49,		// steifer Wind
 		8 => 21.09,		// stürmischer Wind
-		9 => 24.69,		//Sturm
-		10 => 28.81, 	// schwerer Sturm
-		11 => 32.92,	// orkanartiger Sturm
+		9 => 24.69,		// Sturm
+		10 => 28.81, 		// schwerer Sturm
+		11 => 32.92,		// orkanartiger Sturm
 		12 => 999 		// Organ
 	);
 	const MAP_WIND_DIRECTION = array(   
@@ -35,7 +35,7 @@ class GeomarWeatherData  implements JsonSerializable {
 		'O', 'OSO', 'SO,','SSO',
 		'S', 'SSW', 'SW', 'WSW',
 		'W', 'WNW', 'NW', 'NNW', 
-		'N' // for 337.5-360
+		'N' // for North Part 348-360
 	);
 	const MAP_WIND_DIRECTION_RES = 16; 
    	private $data = array();
@@ -78,7 +78,6 @@ class GeomarWeatherData  implements JsonSerializable {
 			if (empty(trim($item->nodeValue))) continue;
 		
 			$value = $this->clean_value($item->nodeValue);
-		//	printf("%3d %s\n", $i, $value);
 
 			switch($i) {
 				case self::GMW_INSTITUT_WINDSPEED:
@@ -172,11 +171,14 @@ class GeomarWeatherData  implements JsonSerializable {
 
 		return $export;
 	} 
+	function send() {
+		Header("Content-type: text/plain");
+		echo json_encode($this, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK | JSON_PRESERVE_ZERO_FRACTION);
+	}
 }
 
-$url = "/Users/olli/wetter.html";
 $d = new GeomarWeatherData();
 $d->load();
-Header("Content-type: text/plain");
-echo json_encode($d, JSON_PRETTY_PRINT | JSON_NUMERIC_CHECK | JSON_PRESERVE_ZERO_FRACTION);
+$d->send();
+
 ?>
