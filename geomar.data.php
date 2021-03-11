@@ -95,8 +95,8 @@ class GeomarWeatherData  implements JsonSerializable {
 					$this->data["INSTITUT"]["temperature_water"] = $value;
 					break;
 				case self::GMW_INSTITUT_HUMIDITY:
-						$this->data["INSTITUT"]["humidity"] = $value;
-						break;
+					$this->data["INSTITUT"]["humidity"] = $value;
+					break;
 				case self::GMW_INSTITUT_PRESSURE:
 					$this->data["INSTITUT"]["pressure"] = $value;
 					break;
@@ -113,7 +113,6 @@ class GeomarWeatherData  implements JsonSerializable {
 					$this->data["LIGHTHOUSE"]["humidity"] = $value;
 					break;
 				case self::GMW_LIGHTHOUSE_WINDDIRECTION:
-						$value = 359;
 					$this->data["LIGHTHOUSE"]["wind_direction"] = $value;
 					$this->data["LIGHTHOUSE"]["wind_direction_txt"] = $this->getWindDirection($value);
 					break;
